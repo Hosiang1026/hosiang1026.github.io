@@ -1,368 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="Access-Control-Allow-Origin" content="*">
-  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
-  <script type="text/javascript">
-    //统计耗时开始
-    var start_time = (new Date()).getTime();
-  </script>
-  <meta http-equiv="Cache-Control" content="no-cache">
-  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-  <!-- Google SEO -->
-  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
-  <!-- Baidu SEO -->
-  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
-  <!-- SouGou SEO -->
-  <meta name="sogou_site_verification" content="MSmrTj7lHV">
-  <!-- ShenMa SEO -->
-  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
-  <!-- Baidu Union -->
-  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
-  
-  <title>推荐系列-一文彻底搞懂Cookie-Session-Token到底是什么 | 狂欢马克思</title>
-<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
-  
-    <meta name="keywords" content="分享技术经验与交流">
-  
-  <meta name="description" content="&amp;emsp;&amp;emsp;&gt; 笔者文笔功力尚浅，如有不妥，请慷慨指出，必定感激不尽 Cookie 洛：大爷，楼上322住的是马冬梅家吧？ 大爷：马都什么？ 夏洛：马冬梅。 大爷：什么都没啊？ 夏洛：马冬梅啊。 大爷：马什么…">
-<meta property="og:type" content="article">
-<meta property="og:title" content="推荐系列-一文彻底搞懂Cookie-Session-Token到底是什么">
-<meta property="og:url" content="https://www.hosiang.cn/b1c7512f/index.html">
-<meta property="og:site_name" content="狂欢马克思">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;&gt; 笔者文笔功力尚浅，如有不妥，请慷慨指出，必定感激不尽 Cookie 洛：大爷，楼上322住的是马冬梅家吧？ 大爷：马都什么？ 夏洛：马冬梅。 大爷：什么都没啊？ 夏洛：马冬梅啊。 大爷：马什么…">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g9cvgll8ltj31mc0plwjb.jpg">
-<meta property="article:published_time" content="2021-04-15T01:19:21.000Z">
-<meta property="article:modified_time" content="2021-06-08T07:54:41.974Z">
-<meta property="article:author" content="Howe Hsiang">
-<meta property="article:tag" content="Popular">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g9cvgll8ltj31mc0plwjb.jpg">
-  
-  
-    <link rel="icon" href="/images/favicon.ico">
-  
-  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  <!-- Baidu Analytics -->
-
-<script>
-	//百度统计
-	var _hmt = _hmt || [];
-	(function() {
-	var hm = document.createElement("script");
-	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
-	var s = document.getElementsByTagName("script")[0];
-	s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-  
-
-  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
-  <!-- Baidu seo -->
-
-<script>
-//百度SEO-自动推送
-(function() {
-	var bp = document.createElement('script');
-	var curProtocol = window.location.protocol.split(':')[0];
-	if (curProtocol === 'https') {
-	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-	} else {
-	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-	}
-	var s = document.getElementsByTagName("script")[0];
-	s.parentNode.insertBefore(bp, s);
-});
-</script>
-
-<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-
-<script src="/js/jquery.min.js"></script>
-
-
-<script src="/js/pace.min.js"></script>
-
-
-<script src="/js/crypto-js.js"></script>
-
-
-<script src="/js/cookie.js"></script>
-
-
-<script src="/js/calendar.js"></script>
-
-
-<script src="/js/festival.js"></script>
-
-
-<script>
-    //获取节日名称和日期
-    getFestival();
-</script>
-
-
-<body>
-    <script>
-        //耗时统计结束
-        window.onload = function(){
-          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
-        }	
-    </script>
-  <div id="container">
-      <header id="header">
-   <div id="banner"></div>
-    <div id="header-outer">
-        <div id="header-menu" class="header-menu-pos animated">
-            <div class="header-menu-container">
-                <a href="/" class="left">
-                    <span class="site-title">狂欢马克思</span>
-                </a>
-                <nav id="header-menu-nav" class="right">
-                    
-                    <a href="/ " rel="external nofollow">
-                        <i class="fa fa-home"></i>
-                        <span>主页</span>
-                    </a>
-                    
-                    <a href="/archives " rel="external nofollow">
-                        <i class="fa fa-archive"></i>
-                        <span>归档</span>
-                    </a>
-                    
-                    <a href="/gitbook " rel="external nofollow">
-                        <i class="fa fa-columns"></i>
-                        <span>笔记</span>
-                    </a>
-                    
-                    <a href="/music?id=91451362 " rel="external nofollow">
-                        <i class="fa fa-music"></i>
-                        <span>音乐</span>
-                    </a>
-                    
-                    <a href="/photo " rel="external nofollow">
-                        <i class="fa fa-picture-o"></i>
-                        <span>相册</span>
-                    </a>
-                    
-                    <a href="/collection " rel="external nofollow">
-                        <i class="fa fa-envira"></i>
-                        <span>收藏</span>
-                    </a>
-                    
-                    <a href="/love " rel="external nofollow">
-                        <i class="fa fa-heart"></i>
-                        <span>恋爱</span>
-                    </a>
-                    
-                    <a href="/about " rel="external nofollow">
-                        <i class="fa fa-user"></i>
-                        <span>关于</span>
-                    </a>
-                    
-                </nav>
-                <a class="mobile-header-menu-button">
-                    <i class="fa fa-bars"></i>
-                </a>
-            </div>
-        </div>
-        <div id="header-row">
-            <div id="logo">
-                <a href="/">
-                    <img src="/../images/logo.png" alt="logo">
-                </a>
-            </div>
-            <div class="header-info">
-                <div id="header-title">
-                    
-                    <h2>
-                        狂欢马克思
-                    </h2>
-                    
-                </div>
-                <div id="header-description">
-                    
-                    <h3>
-                        专注Web开发
-                    </h3>
-                    
-                </div>
-            </div>
-            <nav class="header-nav">
-                <div class="social">
-                    
-                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
-                            <i class="fa fa-github fa-2x"></i></a>
-                    
-                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
-                            <i class="fa fa-qq fa-2x"></i></a>
-                    
-                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
-                            <i class="fa fa-weibo fa-2x"></i></a>
-                    
-                </div>
-            </nav>
-        </div>
-      
-
-<!-- 诗词接口暂时不用-->
-<!-- <span id='jinrishici-sentence'>-->
-<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
- 
-<!-- 滚动公告 -->
-<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
-    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
-    </marquee>
-</div>
-<script type="text/javascript">
-
-$(function(){
-    browserRedirect(); 
-    //获取周末
-    //getWeekend();
-    
-    //var arr = [1, 2];
-    //var bol = arr[Math.floor(Math.random()*arr.length)];
-    //if(bol == 1){
-      //获取一言
-      if($("#hitokoto").length>0){
-         getHitokoto();
-      }
-    //}
-    
-    //if(bol == 2){
-     //获取疫情数据
-     //if($("#YQData").length>0){
-      //getYQData();
-     //}
-   // }
-});
-
-/**
- * 检测PC端与移动端访问
- */
-function browserRedirect() {
-    var sUserAgent = navigator.userAgent.toLowerCase();
-    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
-    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
-    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
-    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
-    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
-    var bIsAndroid = sUserAgent.match(/android/i) == "android";
-    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
-    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
-
-    var contentHtml = "";
-    var fontColor = randomColor();
-    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
-    
-       $("#noticeId").css({"line-height":"1.6em"});
-       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
-            
-           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
-            
-           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
-
-    } else {
-       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
-       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
-            
-           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
-             
-           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
-    }
-    
-    $("#noticeMar").html(contentHtml);
-
-}
-
-//随机生成十六进制颜色值
-function randomColor(){
-    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
-    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
-    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
-    var colorArray = colorValue.split(",");
-    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
-    //使用for循环语句生成剩余的六位十六进制值
-    for(var i=0;i<6;i++){
-        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
-        //字符串相加后，得出的仍是字符串
-        color+=colorArray[Math.floor(Math.random()*16)];
-    }
-    return color;
-}
-</script>
-
-
-
-
-
-    </div>
-</header>
-
-<script>
-//重写live2D的console打印
-console.log=function(){};
-</script>
-
-
-      <!-- 悬浮音乐播放器 -->
-      <!--<script id="ilt" src=/player/js/player.js></script>-->
-      <div class="outer">
-          <section id="main" class="body-wrap"><article id="post-一文彻底搞懂Cookie-Session-Token到底是什么" class="article article-type-post" itemscope itemprop="blogPost">
-
-    <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 class="post-title" itemprop="name">
-      推荐系列-一文彻底搞懂Cookie-Session-Token到底是什么
-    </h1>
-    <div class="post-title-bar">
-      <ul>
-          
-              <li>
-                  <i class="fa fa-book"></i>
-                  
-                      <a href="/categories/热门文章/">热门文章</a>
-                  
-              </li>
-          
-        <li>
-          <i class="fa fa-calendar"></i>  2021-04-15
-        </li>
-        <li>
-          <i class="fa fa-eye"></i>
-          <span id="busuanzi_value_page_pv"></span>
-        </li>
-        <li>
-        <span class="post-count">字数统计: 4k字</span>
-        </li>
-        <li>
-        <span class="post-count">阅读时长: 15分钟</span>
-        </li>
-      </ul>
-    </div>
-  
-
-          
-      </header>
-    
-    <div class="article-entry post-content" itemprop="articleBody">
-      
-            
-            <p>&emsp;&emsp;&gt; 笔者文笔功力尚浅，如有不妥，请慷慨指出，必定感激不尽 Cookie 洛：大爷，楼上322住的是马冬梅家吧？ 大爷：马都什么？ 夏洛：马冬梅。 大爷：什么都没啊？ 夏洛：马冬梅啊。 大爷：马什么…<br><span id="more"></span></p>
-<pre><code>&gt; 笔者文笔功力尚浅，如有不妥，请慷慨指出，必定感激不尽 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="Access-Control-Allow-Origin" content="*"><script type="text/javascript">var start_time=(new Date).getTime()</script><meta http-equiv="Cache-Control" content="no-cache"><meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0"><meta name="baidu-site-verification" content="RYlYHsgO7Y"><meta name="sogou_site_verification" content="MSmrTj7lHV"><meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"><meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be"><title>推荐系列-一文彻底搞懂Cookie-Session-Token到底是什么 | 狂欢马克思</title><meta name="keywords" content="分享技术经验与交流"><meta name="description" content="&amp;emsp;&amp;emsp;&gt; 笔者文笔功力尚浅，如有不妥，请慷慨指出，必定感激不尽 Cookie 洛：大爷，楼上322住的是马冬梅家吧？ 大爷：马都什么？ 夏洛：马冬梅。 大爷：什么都没啊？ 夏洛：马冬梅啊。 大爷：马什么…"><meta property="og:type" content="article"><meta property="og:title" content="推荐系列-一文彻底搞懂Cookie-Session-Token到底是什么"><meta property="og:url" content="https://www.hosiang.cn/b1c7512f/index.html"><meta property="og:site_name" content="狂欢马克思"><meta property="og:description" content="&amp;emsp;&amp;emsp;&gt; 笔者文笔功力尚浅，如有不妥，请慷慨指出，必定感激不尽 Cookie 洛：大爷，楼上322住的是马冬梅家吧？ 大爷：马都什么？ 夏洛：马冬梅。 大爷：什么都没啊？ 夏洛：马冬梅啊。 大爷：马什么…"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g9cvgll8ltj31mc0plwjb.jpg"><meta property="article:published_time" content="2021-04-15T01:19:21.000Z"><meta property="article:modified_time" content="2021-06-08T07:54:41.974Z"><meta property="article:author" content="Howe Hsiang"><meta property="article:tag" content="Popular"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g9cvgll8ltj31mc0plwjb.jpg"><link rel="icon" href="/images/favicon.ico"><link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/style.css"><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script></script><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><meta name="generator" content="Hexo 5.4.0"></head><script src="/js/jquery.min.js"></script><script src="/js/pace.min.js"></script><script src="/js/crypto-js.js"></script><script src="/js/cookie.js"></script><script src="/js/calendar.js"></script><script src="/js/festival.js"></script><script>getFestival()</script><body><script>window.onload=function(){document.getElementById("TimeShow").innerHTML="本站耗时 "+((new Date).getTime()-start_time)/1e3+" 秒 "}</script><div id="container"><header id="header"><div id="banner"></div><div id="header-outer"><div id="header-menu" class="header-menu-pos animated"><div class="header-menu-container"><a href="/" class="left"><span class="site-title">狂欢马克思</span></a><nav id="header-menu-nav" class="right"><a href="/" rel="external nofollow"><i class="fa fa-home"></i> <span>主页</span> </a><a href="/archives" rel="external nofollow"><i class="fa fa-archive"></i> <span>归档</span> </a><a href="/gitbook" rel="external nofollow"><i class="fa fa-columns"></i> <span>笔记</span> </a><a href="/music?id=91451362" rel="external nofollow"><i class="fa fa-music"></i> <span>音乐</span> </a><a href="/photo" rel="external nofollow"><i class="fa fa-picture-o"></i> <span>相册</span> </a><a href="/collection" rel="external nofollow"><i class="fa fa-envira"></i> <span>收藏</span> </a><a href="/love" rel="external nofollow"><i class="fa fa-heart"></i> <span>恋爱</span> </a><a href="/about" rel="external nofollow"><i class="fa fa-user"></i> <span>关于</span></a></nav><a class="mobile-header-menu-button"><i class="fa fa-bars"></i></a></div></div><div id="header-row"><div id="logo"><a href="/"><img src="/../images/logo.png" alt="logo"></a></div><div class="header-info"><div id="header-title"><h2>狂欢马克思</h2></div><div id="header-description"><h3>专注Web开发</h3></div></div><nav class="header-nav"><div class="social"><a title="Github" target="_blank" href="//github.com/Hosiang1026" rel="external nofollow"><i class="fa fa-github fa-2x"></i></a> <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes" rel="external nofollow"><i class="fa fa-qq fa-2x"></i></a> <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969" rel="external nofollow"><i class="fa fa-weibo fa-2x"></i></a></div></nav></div><div id="noticeId" class="show" style="background:rgb(244,247,247,.3)"><marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop()" onmouseout="this.start()"></marquee></div><script type="text/javascript">function browserRedirect(){var i=navigator.userAgent.toLowerCase(),n="ipad"==i.match(/ipad/i),o="iphone os"==i.match(/iphone os/i),a="midp"==i.match(/midp/i),t="rv:1.2.3.4"==i.match(/rv:1.2.3.4/i),e="ucweb"==i.match(/ucweb/i),s="android"==i.match(/android/i),d="windows ce"==i.match(/windows ce/i),p="windows mobile"==i.match(/windows mobile/i),r="",c=randomColor(),r=n||o||a||t||e||s||d||p?($("#noticeId").css({"line-height":"1.6em"}),"<font style='color:"+c+"' face='新华宋体'  size='2'>官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span><span id='hitokoto'></span></span></span><span id='YQData'></font> "):($("#noticeId").css({"line-height":"3.6em","margin-top":"20px"}),"<font style='color:"+c+"' face='新华宋体'  size='6'>官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span><span id='hitokoto'></span></span><span id='YQData'></span></font> ");$("#noticeMar").html(r)}function randomColor(){for(var i="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f".split(","),n="#",o=0;o<6;o++)n+=i[Math.floor(16*Math.random())];return n}$(function(){browserRedirect(),0<$("#hitokoto").length&&getHitokoto()})</script></div></header><script>console.log=function(){}</script><div class="outer"><section id="main" class="body-wrap"><article id="post-一文彻底搞懂Cookie-Session-Token到底是什么" class="article article-type-post" itemscope itemprop="blogPost"><div class="article-inner"><header class="article-header"><h1 class="post-title" itemprop="name">推荐系列-一文彻底搞懂Cookie-Session-Token到底是什么</h1><div class="post-title-bar"><ul><li><i class="fa fa-book"></i> <a href="/categories/热门文章/">热门文章</a></li><li><i class="fa fa-calendar"></i> 2021-04-15</li><li><i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span></li><li><span class="post-count">字数统计: 4k字</span></li><li><span class="post-count">阅读时长: 15分钟</span></li></ul></div></header><div class="article-entry post-content" itemprop="articleBody"><p>&emsp;&emsp;&gt; 笔者文笔功力尚浅，如有不妥，请慷慨指出，必定感激不尽 Cookie 洛：大爷，楼上322住的是马冬梅家吧？ 大爷：马都什么？ 夏洛：马冬梅。 大爷：什么都没啊？ 夏洛：马冬梅啊。 大爷：马什么…<br><span id="more"></span></p><pre><code>&gt; 笔者文笔功力尚浅，如有不妥，请慷慨指出，必定感激不尽 
 </code></pre><h4 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4><pre><code class="java">  洛：大爷，楼上<span class="number">322</span>住的是马冬梅家吧？
 
 大爷：马都什么？
@@ -378,10 +14,7 @@ console.log=function(){};
 夏洛：行，大爷你先凉快着吧。
 
 
-</code></pre>
-<p>在了解这三个概念之前我们先要了解HTTP是无状态的Web服务器，什么是无状态呢？就像上面夏洛特烦恼中经典的一幕对话一样，一次对话完成后下一次对话完全不知道上一次对话发生了什么。如果在Web服务器中只是用来管理静态文件还好说，对方是谁并不重要，把文件从磁盘中读取出来发出去即可。但是随着网络的不断发展，比如电商中的购物车只有记住了用户的身份才能够执行接下来的一系列动作。所以此时就需要我们无状态的服务器记住一些事情。<br>那么Web服务器是如何记住一些事情呢？既然Web服务器记不住东西，那么我们就在外部想办法记住，相当于服务器给每个客户端都贴上了一个小纸条。上面记录了服务器给我们返回的一些信息。然后服务器看到这张小纸条就知道我们是谁了。那么 <code>java 
-  Cookie</code> 是谁产生的呢？Cookies是由服务器产生的。接下来我们描述一下 <code>`</code>java<br>  Cookie</p>
-<pre><code class="产生的过程">
+</code></pre><p>在了解这三个概念之前我们先要了解HTTP是无状态的Web服务器，什么是无状态呢？就像上面夏洛特烦恼中经典的一幕对话一样，一次对话完成后下一次对话完全不知道上一次对话发生了什么。如果在Web服务器中只是用来管理静态文件还好说，对方是谁并不重要，把文件从磁盘中读取出来发出去即可。但是随着网络的不断发展，比如电商中的购物车只有记住了用户的身份才能够执行接下来的一系列动作。所以此时就需要我们无状态的服务器记住一些事情。<br>那么Web服务器是如何记住一些事情呢？既然Web服务器记不住东西，那么我们就在外部想办法记住，相当于服务器给每个客户端都贴上了一个小纸条。上面记录了服务器给我们返回的一些信息。然后服务器看到这张小纸条就知道我们是谁了。那么 <code>java Cookie</code> 是谁产生的呢？Cookies是由服务器产生的。接下来我们描述一下 <code>`</code>java<br>Cookie</p><pre><code class="产生的过程">
  浏览器第一次访问服务端时，服务器此时肯定不知道他的身份，所以创建一个��特的身份标识数据，格式为 ```java 
   key=value
   ``` ，放入到 ```java 
@@ -408,11 +41,7 @@ public String cookies(HttpServletResponse response)&#123;
 &#125;
 
 
-</code></pre>
-<p>项目启动以后我们输入路径 <code>java 
-  http://localhost:8005/testCookies</code> ，然后查看发的请求。可以看到下面那张图使我们首次访问服务器时发送的请求，可以看到服务器返回的响应中有 <code>java 
-  Set-Cookie</code> 字段。而里面的 <code>`</code>java<br>  key=value</p>
-<pre><code class="值正是我们服务器中设置的值。">![Test](https://tva1.sinaimg.cn/large/006y8mN6ly1g9cvgll8ltj31mc0plwjb.jpg  &apos;一文彻底搞懂Cookie-Session-Token到底是什么&apos;) 
+</code></pre><p>项目启动以后我们输入路径 <code>java http://localhost:8005/testCookies</code> ，然后查看发的请求。可以看到下面那张图使我们首次访问服务器时发送的请求，可以看到服务器返回的响应中有 <code>java Set-Cookie</code> 字段。而里面的 <code>`</code>java<br>key=value</p><pre><code class="值正是我们服务器中设置的值。">![Test](https://tva1.sinaimg.cn/large/006y8mN6ly1g9cvgll8ltj31mc0plwjb.jpg  &apos;一文彻底搞懂Cookie-Session-Token到底是什么&apos;) 
 接下来我们再次刷新这个页面可以看到在请求体中已经设置了 ```java 
   Cookie
   ``` 字段，并且将我们的值也带过去了。这样服务器就能够根据 ```java 
@@ -435,24 +64,13 @@ public String cookies(HttpServletResponse response)&#123;
 
  在计算机打开 ```java 
   Chrome
-</code></pre>
-<p> 在右上角，一次点击 <code>java 
-  更多</code> 图标-&gt; <code>`</code>java<br>  设置</p>
-<pre><code>在底部，点击 ```java 
+</code></pre><p>在右上角，一次点击 <code>java 更多</code> 图标-&gt; <code>`</code>java<br>设置</p><pre><code>在底部，点击 ```java 
  高级
-</code></pre><p> 在 <code>`</code>java<br>  隐私设置和安全性</p>
-<pre><code class="下方，点击网站设置">依次点击 ```java 
+</code></pre><p>在 <code>`</code>java<br>隐私设置和安全性</p><pre><code class="下方，点击网站设置">依次点击 ```java 
  Cookie
  ``` -&gt;查看所有 ```java 
  Cookie和网站数据
-</code></pre>
-<p>然后可以根据域名进行搜索所管理的 <code>java 
-  Cookie</code> 数据。所以是浏览器替你管理了 <code>java 
-  Cookie</code> 的数据，如果此时你换成了 <code>java 
-  Firefox</code> 等其他的浏览器，因为 <code>java 
-  Cookie</code> 刚才是存储在 <code>java 
-  Chrome</code> 里面的，所以服务器又蒙圈了，不知道你是谁，就会给 <code>`</code>java<br>  Firefox</p>
-<pre><code class="再次贴上小纸条。">![Test](https://tva1.sinaimg.cn/large/006y8mN6ly1g9cvgll8ltj31mc0plwjb.jpg  &apos;一文彻底搞懂Cookie-Session-Token到底是什么&apos;) 
+</code></pre><p>然后可以根据域名进行搜索所管理的 <code>java Cookie</code> 数据。所以是浏览器替你管理了 <code>java Cookie</code> 的数据，如果此时你换成了 <code>java Firefox</code> 等其他的浏览器，因为 <code>java Cookie</code> 刚才是存储在 <code>java Chrome</code> 里面的，所以服务器又蒙圈了，不知道你是谁，就会给 <code>`</code>java<br>Firefox</p><pre><code class="再次贴上小纸条。">![Test](https://tva1.sinaimg.cn/large/006y8mN6ly1g9cvgll8ltj31mc0plwjb.jpg  &apos;一文彻底搞懂Cookie-Session-Token到底是什么&apos;) 
 ##### Cookie中的参数设置 
 说到这里，应该知道了 ```java 
   Cookie
@@ -475,33 +93,21 @@ public String cookies(HttpServletResponse response)&#123;
    设置cookie的过期时间，单位为秒 
     ```java 
   cookie.setMaxAge(10)
-</code></pre>
-<p>   Domain<br>   指定了Cookie所属的域名 </p>
-<pre><code>```java 
-</code></pre><p>  cookie.setDomain(“”)</p>
-<pre><code>
+</code></pre><p>Domain<br>指定了Cookie所属的域名</p><pre><code>```java 
+</code></pre><p>cookie.setDomain(“”)</p><pre><code>
 
  Path 
  指定了Cookie所属的路径 
   ```java 
 cookie.setPath(&quot;&quot;);
-</code></pre><p>   HttpOnly<br>   告诉浏览器此Cookie只能靠浏览器Http协议传输,禁止其他方式访问 </p>
-<pre><code>```java 
-</code></pre><p>  cookie.setHttpOnly(true)</p>
-<pre><code>
+</code></pre><p>HttpOnly<br>告诉浏览器此Cookie只能靠浏览器Http协议传输,禁止其他方式访问</p><pre><code>```java 
+</code></pre><p>cookie.setHttpOnly(true)</p><pre><code>
 
  Secure 
  告诉浏览器此Cookie只能在Https安全协议中传输,如果是Http则禁止传输 
   ```java 
 cookie.setSecure(true)
-</code></pre><p>下面我就简单演示一下这几个参数的用法及现象。 </p>
-<h6 id="Path"><a href="#Path" class="headerlink" title="Path"></a>Path</h6><p>设置为 <code>java 
-  cookie.setPath(&quot;/testCookies&quot;)</code> ，接下来我们访问 <code>java 
-  http://localhost:8005/testCookies</code> ，我们可以看到在左边和我们指定的路径是一样的，所以 <code>java 
-  Cookie</code> 才在请求头中出现，接下来我们访问 <code>java 
-  http://localhost:8005</code> ，我们发现没有 <code>java 
-  Cookie</code> 字段了，这就是 <code>`</code>java<br>  Path</p>
-<pre><code class="控制的路径。">![Test](https://tva1.sinaimg.cn/large/006y8mN6ly1g9cvgll8ltj31mc0plwjb.jpg  &apos;一文彻底搞懂Cookie-Session-Token到底是什么&apos;) 
+</code></pre><p>下面我就简单演示一下这几个参数的用法及现象。</p><h6 id="Path"><a href="#Path" class="headerlink" title="Path"></a>Path</h6><p>设置为 <code>java cookie.setPath(&quot;/testCookies&quot;)</code> ，接下来我们访问 <code>java http://localhost:8005/testCookies</code> ，我们可以看到在左边和我们指定的路径是一样的，所以 <code>java Cookie</code> 才在请求头中出现，接下来我们访问 <code>java http://localhost:8005</code> ，我们发现没有 <code>java Cookie</code> 字段了，这就是 <code>`</code>java<br>Path</p><pre><code class="控制的路径。">![Test](https://tva1.sinaimg.cn/large/006y8mN6ly1g9cvgll8ltj31mc0plwjb.jpg  &apos;一文彻底搞懂Cookie-Session-Token到底是什么&apos;) 
 ###### Domain 
 设置为 ```java 
   cookie.setDomain(&quot;localhost&quot;)
@@ -525,16 +131,7 @@ cookie.setSecure(true)
 #### Session 
 &gt; Cookie是存储在客户端方，Session是存储在服务端方，客户端只存储 ```java 
   SessionId
-</code></pre>
-<p>在上面我们了解了什么是 <code>java 
-  Cookie</code> ，既然浏览器已经通过 <code>java 
-  Cookie</code> 实现了有状态这一需求，那么为什么又来了一个 <code>java 
-  Session</code> 呢？这里我们想象一下，如果将账户的一些信息都存入 <code>java 
-  Cookie</code> 中的话，一旦信息被拦截，那么我们所有的账户信息都会丢失掉。所以就出现了 <code>java 
-  Session</code> ，在一次会话中将重要信息保存在 <code>java 
-  Session</code> 中，浏览器只记录 <code>java 
-  SessionId</code> 一个 <code>`</code>java<br>  SessionId</p>
-<pre><code class="对应一次会话请求。">![Test](https://tva1.sinaimg.cn/large/006y8mN6ly1g9cvgll8ltj31mc0plwjb.jpg  &apos;一文彻底搞懂Cookie-Session-Token到底是什么&apos;) 
+</code></pre><p>在上面我们了解了什么是 <code>java Cookie</code> ，既然浏览器已经通过 <code>java Cookie</code> 实现了有状态这一需求，那么为什么又来了一个 <code>java Session</code> 呢？这里我们想象一下，如果将账户的一些信息都存入 <code>java Cookie</code> 中的话，一旦信息被拦截，那么我们所有的账户信息都会丢失掉。所以就出现了 <code>java Session</code> ，在一次会话中将重要信息保存在 <code>java Session</code> 中，浏览器只记录 <code>java SessionId</code> 一个 <code>`</code>java<br>SessionId</p><pre><code class="对应一次会话请求。">![Test](https://tva1.sinaimg.cn/large/006y8mN6ly1g9cvgll8ltj31mc0plwjb.jpg  &apos;一文彻底搞懂Cookie-Session-Token到底是什么&apos;) 
  ```java 
   @RequestMapping(&quot;/testSession&quot;)
 @ResponseBody
@@ -552,14 +149,7 @@ public String testGetSession(HttpSession session)&#123;
 &#125;
 
 
-</code></pre>
-<p>这里我们写一个新的方法来测试 <code>java 
-  Session</code> 是如何产生的，我们在请求参数中加上 <code>java 
-  HttpSession session</code> ，然后再浏览器中输入 <code>java 
-  http://localhost:8005/testSession</code> 进行访问可以看到在服务器的返回头中在 <code>java 
-  Cookie</code> 中生成了一个 <code>java 
-  SessionId</code> 。然后浏览器记住此 <code>`</code>java<br>  SessionId</p>
-<pre><code class="下次访问时可以带着此Id，然后就能根据此Id找到存储在服务端的信息了。">![Test](https://tva1.sinaimg.cn/large/006y8mN6ly1g9cvgll8ltj31mc0plwjb.jpg  &apos;一文彻底搞懂Cookie-Session-Token到底是什么&apos;) 
+</code></pre><p>这里我们写一个新的方法来测试 <code>java Session</code> 是如何产生的，我们在请求参数中加上 <code>java HttpSession session</code> ，然后再浏览器中输入 <code>java http://localhost:8005/testSession</code> 进行访问可以看到在服务器的返回头中在 <code>java Cookie</code> 中生成了一个 <code>java SessionId</code> 。然后浏览器记住此 <code>`</code>java<br>SessionId</p><pre><code class="下次访问时可以带着此Id，然后就能根据此Id找到存储在服务端的信息了。">![Test](https://tva1.sinaimg.cn/large/006y8mN6ly1g9cvgll8ltj31mc0plwjb.jpg  &apos;一文彻底搞懂Cookie-Session-Token到底是什么&apos;) 
 此时我们访问路径 ```java 
   http://localhost:8005/testGetSession
   ``` ，发现得到了我们上面存储在 ```java 
@@ -648,18 +238,11 @@ public Session createSession(String sessionId) &#123;
 &#125;
 
 
-</code></pre>
-<p>到此我们明白了 <code>java 
-  Session</code> 是如何创建出来的，创建出来后 <code>java 
-  Session</code> 会被保存到一个 <code>java 
-  ConcurrentHashMap</code> 中。可以看 <code>`</code>java<br>  StandardSession</p>
-<pre><code class="类。">```java 
+</code></pre><p>到此我们明白了 <code>java Session</code> 是如何创建出来的，创建出来后 <code>java Session</code> 会被保存到一个 <code>java ConcurrentHashMap</code> 中。可以看 <code>`</code>java<br>StandardSession</p><pre><code class="类。">```java 
  protected Map&lt;string, session&gt; sessions = new ConcurrentHashMap&amp;lt;&amp;gt;();
 
 
-</code></pre>
-<p>到这里大家应该对 <code>`</code>java<br>  Session</p>
-<pre><code class="有简单的了解了。">&gt; Session是存储在Tomcat的容器中，所以如果后端机器是多台的话，因此多个机器间是无法共享Session的，此时可以使用Spring提供的分布式Session的解决方案，是将Session放在了Redis中。 
+</code></pre><p>到这里大家应该对 <code>`</code>java<br>Session</p><pre><code class="有简单的了解了。">&gt; Session是存储在Tomcat的容器中，所以如果后端机器是多台的话，因此多个机器间是无法共享Session的，此时可以使用Spring提供的分布式Session的解决方案，是将Session放在了Redis中。 
 #### Token 
  ```java 
   Session
@@ -706,23 +289,13 @@ JWT是有三部分组成的
 &#125;
 
 
-</code></pre>
-<p>上面代码中，alg属性表示签名的算法（algorithm），默认是 HMAC SHA256（写成 HS256）；typ属性表示这个令牌（token）的类型（type），JWT 令牌统一写为JWT。 最后，将上面的 JSON 对象使用 Base64URL 算法转成字符串。 </p>
-<blockquote>
-<p>JWT 作为一个令牌（token），有些场合可能会放到 URL（比如 api.example.com/?token=xxx）。Base64 有三个字符+、/和=，在 URL 里面有特殊含义，所以要被替换掉：=被省略、+替换成-，/替换成_ 。这就是 Base64URL 算法。 </p>
-</blockquote>
-<h6 id="Payload"><a href="#Payload" class="headerlink" title="Payload"></a>Payload</h6><p>Payload部分也是一个Json对象，用来存放实际需要传输的数据，JWT官方规定了下面几个官方的字段供选用。 </p>
-<p> iss (issuer)：签发人<br> exp (expiration time)：过期时间<br> sub (subject)：主题<br> aud (audience)：受众<br> nbf (Not Before)：生效时间<br> iat (Issued At)：签发时间<br> jti (JWT ID)：编号 </p>
-<p>当然除了官方提供的这几个字段我们也能够自己定义私有字段，下面就是一个例子 </p>
-<pre><code class="java">  &#123;
+</code></pre><p>上面代码中，alg属性表示签名的算法（algorithm），默认是 HMAC SHA256（写成 HS256）；typ属性表示这个令牌（token）的类型（type），JWT 令牌统一写为JWT。 最后，将上面的 JSON 对象使用 Base64URL 算法转成字符串。</p><blockquote><p>JWT 作为一个令牌（token），有些场合可能会放到 URL（比如 api.example.com/?token=xxx）。Base64 有三个字符+、/和=，在 URL 里面有特殊含义，所以要被替换掉：=被省略、+替换成-，/替换成_ 。这就是 Base64URL 算法。</p></blockquote><h6 id="Payload"><a href="#Payload" class="headerlink" title="Payload"></a>Payload</h6><p>Payload部分也是一个Json对象，用来存放实际需要传输的数据，JWT官方规定了下面几个官方的字段供选用。</p><p>iss (issuer)：签发人<br>exp (expiration time)：过期时间<br>sub (subject)：主题<br>aud (audience)：受众<br>nbf (Not Before)：生效时间<br>iat (Issued At)：签发时间<br>jti (JWT ID)：编号</p><p>当然除了官方提供的这几个字段我们也能够自己定义私有字段，下面就是一个例子</p><pre><code class="java">  &#123;
   <span class="string">"name"</span>: <span class="string">"xiaoMing"</span>,
   <span class="string">"age"</span>: <span class="number">14</span>
 &#125;
 
 
-</code></pre>
-<p>默认情况下JWT是不加密的，任何人只要在网上进行Base64解码就可以读到信息，所以一般不要将秘密信息放在这个部分。这个Json对象也要用 <code>`</code>java<br>  Base64URL </p>
-<pre><code class="算法转成字符串">###### Signature 
+</code></pre><p>默认情况下JWT是不加密的，任何人只要在网上进行Base64解码就可以读到信息，所以一般不要将秘密信息放在这个部分。这个Json对象也要用 <code>`</code>java<br>Base64URL</p><pre><code class="算法转成字符串">###### Signature 
 Signature部分是对前面的两部分的数据进行签名，防止数据篡改。 
 首先需要定义一个秘钥，这个秘钥只有服务器才知道，不能泄露给用户，然后使用Header中指定的签名算法(默认情况是HMAC SHA256)，算出签名以后将Header、Payload、Signature三部分拼成一个字符串，每个部分用 ```java 
   .
@@ -735,9 +308,7 @@ Signature部分是对前面的两部分的数据进行签名，防止数据篡�
   compile(&apos;io.jsonwebtoken:jjwt:0.9.0&apos;)
 
 
-</code></pre>
-<p>然后编码如下 </p>
-<pre><code class="java">  <span class="comment">// 签名算法 ，将对token进行签名</span>
+</code></pre><p>然后编码如下</p><pre><code class="java">  <span class="comment">// 签名算法 ，将对token进行签名</span>
 SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 <span class="comment">// 通过秘钥签名JWT</span>
 <span class="keyword">byte</span>[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(<span class="string">"SECRET"</span>);
@@ -753,388 +324,7 @@ JwtBuilder builderWithSercet = Jwts.builder()
 System.out.printf(builderWithSercet.compact());
 
 
-</code></pre>
-<p>发现输出的Token如下 </p>
-<pre><code class="java">eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0IiwiaXNzIjoiaXNzdWVyIiwibmFtZSI6InhpYW9NaW5nIiwiYWdlIjoxNH0<span class="number">.3</span>KOWQ-oYvBSzslW5vgB1D-JpCwS-HkWGyWdXCP5l3Ko
+</code></pre><p>发现输出的Token如下</p><pre><code class="java">eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0IiwiaXNzIjoiaXNzdWVyIiwibmFtZSI6InhpYW9NaW5nIiwiYWdlIjoxNH0<span class="number">.3</span>KOWQ-oYvBSzslW5vgB1D-JpCwS-HkWGyWdXCP5l3Ko
 
 
-</code></pre>
-<p>此时在网上随便找个Base64解码的网站就能将信息解码出来<br><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g9cvgll8ltj31mc0plwjb.jpg" alt="Test" title="一文彻底搞懂Cookie-Session-Token到底是什么"> </p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>相信大家看到这应该对 <code>java 
-  Cookie</code> 、 <code>java 
-  Session</code> 、 <code>java 
-  Token</code> 有一定的了解了，接下来再回顾一下重要的知识点 </p>
-<p> Cookie是存储在客户端的<br> Session是存储在服务端的，可以理解为一个状态列表。拥有一个唯一会话标识 <code>java 
-  SessionId</code> 。可以根据 <code>java 
-  SessionId</code> 在服务端查询到存储的信息。<br> Session会引发一个问题，即后端多台机器时Session共享的问题，解决方案可以使用Spring提供的框架。<br> Token类似一个令牌，无状态的，服务端所需的信息被Base64编码后放到Token中，服务器可以直接解码出其中的数据。 </p>
-<h4 id="GitHub代码地址"><a href="#GitHub代码地址" class="headerlink" title="GitHub代码地址"></a>GitHub代码地址</h4><h4 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h4><p> Cookies vs. Tokens: The Definitive Guide<br> 彻底弄懂session，cookie，token<br> 透视HTTP协议<br> Manager组件：Tomcat的Session管理机制解析<br> JSON Web Token 入门教程<br> SpringBoot集成JWT实现token验证<br> JSON Web Token - 在Web应用间安全地传递信息&lt;/string,object&gt;&lt;/string,&gt; </p>
-
-            <div class="post-copyright">
-    <div class="content">
-        
-          <p>本文标题： 推荐系列-一文彻底搞懂Cookie-Session-Token到底是什么</p>
-        
-        
-          <p>本文作者： OSChina</p>
-        
-        <p>发布时间： 2021年04月15日 09:19</p>
-        <p>最后更新： 2021年06月08日 15:54</p>
-        <p>原始链接： <a class="post-url" href="/b1c7512f/" title="推荐系列-一文彻底搞懂Cookie-Session-Token到底是什么">https://www.hosiang.cn/b1c7512f/</a></p>
-        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
-        <footer>
-            <a href="https://www.hosiang.cn">
-                <img src="/../images/logo.png" alt="Howe Hsiang">
-                Howe Hsiang
-            </a>
-        </footer>
-    </div>
-</div>
-
-      
-        
-            
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;">赏</a>
-</div>
-
-<div id="reward" class="post-modal reward-lay">
-    <a class="close" href="javascript:;" id="reward-close">×</a>
-    <span class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        喜欢就赞赏一下呗！
-        <i class="icon icon-quote-right"></i>
-    </span>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
-        </div>
-        <div class="reward-select">
-            
-            
-        </div>
-    </div>
-</div>
-
-
-        
-    </div>
-
-    <footer class="article-footer">
-        
-        
-<div class="post-share">
-    <a href="javascript:" id="share-sub" class="post-share-fab">
-        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
-    </a>
-    <div class="post-share-list" id="share-list">
-        <ul class="share-icons">
-          <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/b1c7512f/" data-title="Facebook" rel="external nofollow noopener noreferrer">
-              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
-            </a>
-          </li>
-          <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-一文彻底搞懂Cookie-Session-Token到底是什么》 — 狂欢马克思&url=https://www.hosiang.cn/b1c7512f/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
-              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
-            </a>
-          </li>
-          <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/b1c7512f/" data-title="Google+" rel="external nofollow noopener noreferrer">
-              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
-            </a>
-          </li>
-            <li>
-                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/b1c7512f/&title=《推荐系列-一文彻底搞懂Cookie-Session-Token到底是什么》 — 狂欢马克思&source=&emsp;&emsp;&gt; 笔者文笔功力尚浅，如有不妥，请慷慨指出，必定感激不尽 Cookie 洛：大爷，楼上322住的是马冬梅家吧？ 大爷：马都什..." data-title="QQ" rel="external nofollow noopener noreferrer">
-                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
-                </a>
-            </li>
-            <li>
-                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
-                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
-                </a>
-            </li>
-            <li>
-                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/b1c7512f/&title=《推荐系列-一文彻底搞懂Cookie-Session-Token到底是什么》 — 狂欢马克思&pic=https://cdn.pixabay.com/photo/2016/01/08/17/06/poppy-1128683__480.jpg" data-title="微博" rel="external nofollow noopener noreferrer">
-                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
-                </a>
-            </li>
-        </ul>
-     </div>
-</div>
-<div class="post-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:" id="wxShare-close">×</a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/b1c7512f/" alt="微信分享二维码">
-</div>
-
-<div class="mask"></div>
-
-        
-        <ul class="article-footer-menu">
-            
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Popular/" class="color3">Popular</a>
-      
-  </li>
-
-        </ul>
-        
-    </footer>
-  </div>
-</article>
-
-
-    <aside class="post-toc-pos post-toc-top" id="post-toc">
-        <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Cookie"><span class="post-toc-text">Cookie</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#Path"><span class="post-toc-text">Path</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#Payload"><span class="post-toc-text">Payload</span></a></li></ol></li></ol><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%80%BB%E7%BB%93"><span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#GitHub%E4%BB%A3%E7%A0%81%E5%9C%B0%E5%9D%80"><span class="post-toc-text">GitHub代码地址</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="post-toc-text">参考文章</span></a></li>
-        </nav>
-    </aside>
-    
-
-<nav id="article-nav">
-  
-    <a href="/a1b2216c/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          推荐系列-​秉承工匠精神，3步定位飞桨报错原因，你也来试试-
-        
-      </span>
-    </a>
-  
-  
-    <a href="/9be7b851/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">推荐系列-一鼓作气学会-一致性哈希-，就靠这 18 张图了</span>
-      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
-    </a>
-  
-</nav>
-
-
-
-    
-        <div id="gitalk"></div>
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-<script>
-    var gitalk = new Gitalk({
-      repo: 'bolg-comment',
-      owner: 'Hosiang1026',
-      admin: 'Hosiang1026',
-      clientID:  '37a2dd4473e8970cecc2',
-      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
-      pagerDirection: 'last',
-      distractionFreeMode: true,
-      createIssueManually: false
-    });
-gitalk.render('gitalk');
-</script>
-      
-</section>
-        
-      </div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
-      <script async src="//waust.at/s.js"></script>
-      <p>
-        <!-- Hosted by <a target="_blank" href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow noopener">Coding Pages</a> 
-        <a>Howe Hsiang</a>
-        <br>-->
-        
-    <span id="busuanzi_container_site_uv" style="display:none">
-     <span class="post-count">
-        总字数：<span>1260k</span>
-     </span>
-        总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style="display:none">
-        总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-  <br>
-
-
-         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
-         <br>
-        Copyright&copy; 2018 - 2021 狂欢马克思
-        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
-          京ICP备17060439号</a>
-      </p>
-    </div>
-  </div>
-  <script>
-      var now = new Date();
-      function createtime() {
-          //此处修改你的建站时间或者网站上线时间
-          var grt= new Date("2017/09/18");
-          now.setTime(now.getTime()+250);
-          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
-          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
-          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
-          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
-          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
-          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
-          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
-          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
-      }
-   setInterval("createtime()",800);
-  </script>
-</footer>
-
-    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
-
-<script>
-  var mihoConfig = {
-      root: "https://www.hosiang.cn",
-      animate: "true",
-      isHome: "false",
-      share: "true",
-      reward:" 1"
-  }
-</script>
-<div class="sidebar">
-    <div id="sidebar-search" title="Search">
-        <i class="fa fa-search"></i>
-    </div>
-    <div id="sidebar-category" title="Categories">
-        <i class="fa fa-book"></i>
-    </div>
-    <div id="sidebar-tag" title="Tags">
-        <i class="fa fa-tags"></i>
-    </div>
-    <div id="sidebar-top">
-        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
-    </div>
-</div>
-<div class="sidebar-menu-box" id="sidebar-menu-box">
-    <div class="sidebar-menu-box-container">
-        <div id="sidebar-menu-box-categories">
-            <a class="category-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a><a class="category-link" href="/categories/%E5%85%B6%E4%BB%96%E5%BC%80%E5%8F%91/">其他开发</a><a class="category-link" href="/categories/%E5%89%8D%E6%B2%BF%E5%BC%80%E5%8F%91/">前沿开发</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><a class="category-link" href="/categories/%E5%8D%87%E7%BA%A7%E7%89%88%E6%9C%AC/">升级版本</a><a class="category-link" href="/categories/%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/">博客教程</a><a class="category-link" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a><a class="category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><a class="category-link" href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">日常记录</a><a class="category-link" href="/categories/%E7%83%AD%E9%97%A8%E6%96%87%E7%AB%A0/">热门文章</a>
-        </div>
-        <div id="sidebar-menu-box-tags">
-            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
-        </div>
-    </div>
-    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
-</div>
-<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
-    <div class="mobile-header-menu-container">
-        <span class="title">导航</span>
-        <ul class="mobile-header-menu-navbar">
-            
-            <li>
-                <a href="/">
-                    <i class="fa fa-home"></i><span>主页</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="/archives">
-                    <i class="fa fa-archive"></i><span>归档</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="/gitbook">
-                    <i class="fa fa-columns"></i><span>笔记</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="/music?id=91451362">
-                    <i class="fa fa-music"></i><span>音乐</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="/photo">
-                    <i class="fa fa-picture-o"></i><span>相册</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="/collection">
-                    <i class="fa fa-envira"></i><span>收藏</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="/love">
-                    <i class="fa fa-heart"></i><span>恋爱</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="/about">
-                    <i class="fa fa-user"></i><span>关于</span>
-                </a>
-            </li>
-            
-        </ul>
-    </div>
-    <div class="mobile-header-tag-container">
-        <span class="title">标签</span>
-        <div id="mobile-header-container-tags">
-            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
-        </div>
-    </div>
-</div>
-<div class="search-wrap">
-    <span class="search-close">&times;</span>
-        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
-            <i class="icon icon-lg icon-chevron-left"></i>
-        </a>
-        <input class="search-field" placeholder="Search..." id="keywords">
-        <a id="search-submit" href="javascript:">
-            <i class="fa fa-search"></i>
-        </a>
-    <div class="search-container" id="search-container">
-        <ul class="search-result" id="search-result">
-        </ul>
-    </div>
-</div>
-
-<div id="search-tpl">
-    <li class="search-result-item">
-        <a href="{url}" class="search-item-li">
-            <span class="search-item-li-title" title="{title}">{title}</span>
-        </a>
-    </li>
-</div>
-
-<script src="/js/search.js"></script>
-
-
-<script src="/js/main.js"></script>
-
-
-
-  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
-  <div id="particles"></div>
-  
-<script src="/js/particles.js"></script>
-
-
-
-
-
-
-
-
-  
-<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
-
-  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
-  
-<script src="/js/animate.js"></script>
-
-
-  </div>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
-</html>
+</code></pre><p>此时在网上随便找个Base64解码的网站就能将信息解码出来<br><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g9cvgll8ltj31mc0plwjb.jpg" alt="Test" title="一文彻底搞懂Cookie-Session-Token到底是什么"></p><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>相信大家看到这应该对 <code>java Cookie</code> 、 <code>java Session</code> 、 <code>java Token</code> 有一定的了解了，接下来再回顾一下重要的知识点</p><p>Cookie是存储在客户端的<br>Session是存储在服务端的，可以理解为一个状态列表。拥有一个唯一会话标识 <code>java SessionId</code> 。可以根据 <code>java SessionId</code> 在服务端查询到存储的信息。<br>Session会引发一个问题，即后端多台机器时Session共享的问题，解决方案可以使用Spring提供的框架。<br>Token类似一个令牌，无状态的，服务端所需的信息被Base64编码后放到Token中，服务器可以直接解码出其中的数据。</p><h4 id="GitHub代码地址"><a href="#GitHub代码地址" class="headerlink" title="GitHub代码地址"></a>GitHub代码地址</h4><h4 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h4><p>Cookies vs. Tokens: The Definitive Guide<br>彻底弄懂session，cookie，token<br>透视HTTP协议<br>Manager组件：Tomcat的Session管理机制解析<br>JSON Web Token 入门教程<br>SpringBoot集成JWT实现token验证<br>JSON Web Token - 在Web应用间安全地传递信息&lt;/string,object&gt;&lt;/string,&gt;</p><div class="post-copyright"><div class="content"><p>本文标题： 推荐系列-一文彻底搞懂Cookie-Session-Token到底是什么</p><p>本文作者： OSChina</p><p>发布时间： 2021年04月15日 09:19</p><p>最后更新： 2021年06月08日 15:54</p><p>原始链接： <a class="post-url" href="/b1c7512f/" title="推荐系列-一文彻底搞懂Cookie-Session-Token到底是什么">https://www.hosiang.cn/b1c7512f/</a></p><p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p><footer><a href="https://www.hosiang.cn"><img src="/../images/logo.png" alt="Howe Hsiang"> Howe Hsiang</a></footer></div></div><div class="page-reward"><a id="rewardBtn" href="javascript:;">赏</a></div><div id="reward" class="post-modal reward-lay"><a class="close" href="javascript:;" id="reward-close">×</a> <span class="reward-title"><i class="icon icon-quote-left"></i> 喜欢就赞赏一下呗！ <i class="icon icon-quote-right"></i></span><div class="reward-content"><div class="reward-code"><img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码"></div><div class="reward-select"></div></div></div></div><footer class="article-footer"><div class="post-share"><a href="javascript:" id="share-sub" class="post-share-fab"><i class="fa fa-share-alt" style="padding-top:11px!important"></i></a><div class="post-share-list" id="share-list"><ul class="share-icons"><li><a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/b1c7512f/" data-title="Facebook" rel="external nofollow noopener noreferrer"><i class="fa fa-facebook" style="padding-top:9px!important"></i></a></li><li><a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-一文彻底搞懂Cookie-Session-Token到底是什么》 — 狂欢马克思&url=https://www.hosiang.cn/b1c7512f/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer"><i class="fa fa-twitter" style="padding-top:9px!important"></i></a></li><li><a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/b1c7512f/" data-title="Google+" rel="external nofollow noopener noreferrer"><i class="fa fa-google-plus" style="padding-top:9px!important"></i></a></li><li><a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/b1c7512f/&title=《推荐系列-一文彻底搞懂Cookie-Session-Token到底是什么》 — 狂欢马克思&source=&emsp;&emsp;&gt; 笔者文笔功力尚浅，如有不妥，请慷慨指出，必定感激不尽 Cookie 洛：大爷，楼上322住的是马冬梅家吧？ 大爷：马都什..." data-title="QQ" rel="external nofollow noopener noreferrer"><i class="fa fa-qq" style="padding-top:9px!important"></i></a></li><li><a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信"><i class="fa fa-weixin" style="padding-top:9px!important"></i></a></li><li><a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/b1c7512f/&title=《推荐系列-一文彻底搞懂Cookie-Session-Token到底是什么》 — 狂欢马克思&pic=https://cdn.pixabay.com/photo/2016/01/08/17/06/poppy-1128683__480.jpg" data-title="微博" rel="external nofollow noopener noreferrer"><i class="fa fa-weibo" style="padding-top:9px!important"></i></a></li></ul></div></div><div class="post-modal wx-share" id="wxShare"><a class="close" href="javascript:" id="wxShare-close">×</a><p>扫一扫，分享到微信</p><img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/b1c7512f/" alt="微信分享二维码"></div><div class="mask"></div><ul class="article-footer-menu"><li class="article-footer-tags"><i class="fa fa-tags"></i> <a href="/tags/Popular/" class="color3">Popular</a></li></ul></footer></div></article><aside class="post-toc-pos post-toc-top" id="post-toc"><nav class="post-toc-wrap"><ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Cookie"><span class="post-toc-text">Cookie</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#Path"><span class="post-toc-text">Path</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#Payload"><span class="post-toc-text">Payload</span></a></li></ol></li></ol><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%80%BB%E7%BB%93"><span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#GitHub%E4%BB%A3%E7%A0%81%E5%9C%B0%E5%9D%80"><span class="post-toc-text">GitHub代码地址</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="post-toc-text">参考文章</span></a></li></nav></aside><nav id="article-nav"><a href="/a1b2216c/" id="article-nav-newer" class="article-nav-link-wrap"><span class="article-nav-title"><i class="fa fa-hand-o-left" aria-hidden="true"></i> 推荐系列-​秉承工匠精神，3步定位飞桨报错原因，你也来试试- </span></a><a href="/9be7b851/" id="article-nav-older" class="article-nav-link-wrap"><span class="article-nav-title">推荐系列-一鼓作气学会-一致性哈希-，就靠这 18 张图了</span> <i class="fa fa-hand-o-right" aria-hidden="true"></i></a></nav><div id="gitalk"></div><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script><script>var gitalk=new Gitalk({repo:"bolg-comment",owner:"Hosiang1026",admin:"Hosiang1026",clientID:"37a2dd4473e8970cecc2",clientSecret:"e30efa17d86d9de4f4ab810872dc62a7b2e7e634",pagerDirection:"last",distractionFreeMode:!0,createIssueManually:!1});gitalk.render("gitalk")</script></section></div><footer id="footer"><div class="outer"><div id="footer-info" class="inner"><script id="_wau78w">var _wau=_wau||[];_wau.push(["small","5dnguv4c2n","78w"])</script><script async src="//waust.at/s.js"></script><p><span id="busuanzi_container_site_uv" style="display:none"><span class="post-count">总字数：<span>1260k</span> </span>总访客数：<span id="busuanzi_value_site_uv"></span> </span><span id="busuanzi_container_site_pv" style="display:none">总访问量：<span id="busuanzi_value_site_pv"></span></span><br><span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><br>Copyright&copy; 2018 - 2021 狂欢马克思 <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">京ICP备17060439号</a></p></div></div><script>var now=new Date;function createtime(){var n=new Date("2017/09/18");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="安全运行 "+dnum+" 天 ",document.getElementById("times").innerHTML=hnum+" 小时 "+mnum+" 分 "+snum+" 秒"}setInterval("createtime()",800)</script></footer><script>var mihoConfig={root:"https://www.hosiang.cn",animate:"true",isHome:"false",share:"true",reward:" 1"}</script><div class="sidebar"><div id="sidebar-search" title="Search"><i class="fa fa-search"></i></div><div id="sidebar-category" title="Categories"><i class="fa fa-book"></i></div><div id="sidebar-tag" title="Tags"><i class="fa fa-tags"></i></div><div id="sidebar-top"><span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span></div></div><div class="sidebar-menu-box" id="sidebar-menu-box"><div class="sidebar-menu-box-container"><div id="sidebar-menu-box-categories"><a class="category-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a><a class="category-link" href="/categories/%E5%85%B6%E4%BB%96%E5%BC%80%E5%8F%91/">其他开发</a><a class="category-link" href="/categories/%E5%89%8D%E6%B2%BF%E5%BC%80%E5%8F%91/">前沿开发</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><a class="category-link" href="/categories/%E5%8D%87%E7%BA%A7%E7%89%88%E6%9C%AC/">升级版本</a><a class="category-link" href="/categories/%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/">博客教程</a><a class="category-link" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a><a class="category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><a class="category-link" href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">日常记录</a><a class="category-link" href="/categories/%E7%83%AD%E9%97%A8%E6%96%87%E7%AB%A0/">热门文章</a></div><div id="sidebar-menu-box-tags"><a href="/tags/Ajax/" style="font-size:10px">Ajax</a> <a href="/tags/AliGenie/" style="font-size:10px">AliGenie</a> <a href="/tags/Alipay/" style="font-size:10px">Alipay</a> <a href="/tags/Android/" style="font-size:10px">Android</a> <a href="/tags/Blockchain/" style="font-size:17.5px">Blockchain</a> <a href="/tags/CQRS/" style="font-size:10px">CQRS</a> <a href="/tags/Database/" style="font-size:15px">Database</a> <a href="/tags/Docker/" style="font-size:10px">Docker</a> <a href="/tags/EasyUI/" style="font-size:10px">EasyUI</a> <a href="/tags/Guitar/" style="font-size:10px">Guitar</a> <a href="/tags/Hackintosh/" style="font-size:12.5px">Hackintosh</a> <a href="/tags/Hexo/" style="font-size:15px">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size:10px">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size:12.5px">Java</a> <a href="/tags/Kali-Linux/" style="font-size:10px">Kali Linux</a> <a href="/tags/Life/" style="font-size:17.5px">Life</a> <a href="/tags/Mac-OS/" style="font-size:12.5px">Mac OS</a> <a href="/tags/MultiThread/" style="font-size:10px">MultiThread</a> <a href="/tags/NodeJS/" style="font-size:10px">NodeJS</a> <a href="/tags/Popular/" style="font-size:20px">Popular</a> <a href="/tags/Python/" style="font-size:10px">Python</a> <a href="/tags/SaaS/" style="font-size:10px">SaaS</a> <a href="/tags/Servlet/" style="font-size:10px">Servlet</a> <a href="/tags/Spring/" style="font-size:17.5px">Spring</a> <a href="/tags/Upgrade/" style="font-size:10px">Upgrade</a> <a href="/tags/Web/" style="font-size:10px">Web</a> <a href="/tags/Windows/" style="font-size:10px">Windows</a> <a href="/tags/Work/" style="font-size:10px">Work</a> <a href="/tags/iOS/" style="font-size:10px">iOS</a></div></div><a href="javascript:" class="sidebar-menu-box-close">&times;</a></div><div class="mobile-header-menu-nav" id="mobile-header-menu-nav"><div class="mobile-header-menu-container"><span class="title">导航</span><ul class="mobile-header-menu-navbar"><li><a href="/"><i class="fa fa-home"></i><span>主页</span></a></li><li><a href="/archives"><i class="fa fa-archive"></i><span>归档</span></a></li><li><a href="/gitbook"><i class="fa fa-columns"></i><span>笔记</span></a></li><li><a href="/music?id=91451362"><i class="fa fa-music"></i><span>音乐</span></a></li><li><a href="/photo"><i class="fa fa-picture-o"></i><span>相册</span></a></li><li><a href="/collection"><i class="fa fa-envira"></i><span>收藏</span></a></li><li><a href="/love"><i class="fa fa-heart"></i><span>恋爱</span></a></li><li><a href="/about"><i class="fa fa-user"></i><span>关于</span></a></li></ul></div><div class="mobile-header-tag-container"><span class="title">标签</span><div id="mobile-header-container-tags"><a href="/tags/Ajax/" style="font-size:10px">Ajax</a> <a href="/tags/AliGenie/" style="font-size:10px">AliGenie</a> <a href="/tags/Alipay/" style="font-size:10px">Alipay</a> <a href="/tags/Android/" style="font-size:10px">Android</a> <a href="/tags/Blockchain/" style="font-size:17.5px">Blockchain</a> <a href="/tags/CQRS/" style="font-size:10px">CQRS</a> <a href="/tags/Database/" style="font-size:15px">Database</a> <a href="/tags/Docker/" style="font-size:10px">Docker</a> <a href="/tags/EasyUI/" style="font-size:10px">EasyUI</a> <a href="/tags/Guitar/" style="font-size:10px">Guitar</a> <a href="/tags/Hackintosh/" style="font-size:12.5px">Hackintosh</a> <a href="/tags/Hexo/" style="font-size:15px">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size:10px">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size:12.5px">Java</a> <a href="/tags/Kali-Linux/" style="font-size:10px">Kali Linux</a> <a href="/tags/Life/" style="font-size:17.5px">Life</a> <a href="/tags/Mac-OS/" style="font-size:12.5px">Mac OS</a> <a href="/tags/MultiThread/" style="font-size:10px">MultiThread</a> <a href="/tags/NodeJS/" style="font-size:10px">NodeJS</a> <a href="/tags/Popular/" style="font-size:20px">Popular</a> <a href="/tags/Python/" style="font-size:10px">Python</a> <a href="/tags/SaaS/" style="font-size:10px">SaaS</a> <a href="/tags/Servlet/" style="font-size:10px">Servlet</a> <a href="/tags/Spring/" style="font-size:17.5px">Spring</a> <a href="/tags/Upgrade/" style="font-size:10px">Upgrade</a> <a href="/tags/Web/" style="font-size:10px">Web</a> <a href="/tags/Windows/" style="font-size:10px">Windows</a> <a href="/tags/Work/" style="font-size:10px">Work</a> <a href="/tags/iOS/" style="font-size:10px">iOS</a></div></div></div><div class="search-wrap"><span class="search-close">&times;</span> <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back"><i class="icon icon-lg icon-chevron-left"></i> </a><input class="search-field" placeholder="Search..." id="keywords"> <a id="search-submit" href="javascript:"><i class="fa fa-search"></i></a><div class="search-container" id="search-container"><ul class="search-result" id="search-result"></ul></div></div><div id="search-tpl"><li class="search-result-item"><a href="{url}" class="search-item-li"><span class="search-item-li-title" title="{title}">{title}</span></a></li></div><script src="/js/search.js"></script><script src="/js/main.js"></script><script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script><div id="particles"></div><script src="/js/particles.js"></script><link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css"><script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script><script src="/js/animate.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({pluginRootPath:"live2dw/",pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:"/live2dw/assets/hijiki.model.json"},display:{position:"right",width:150,height:300},mobile:{show:!0,scale:.5},log:!1})</script></body></html>
